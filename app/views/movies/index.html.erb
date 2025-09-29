@@ -28,32 +28,29 @@
 
 <%#  Part 1: Start here... %>
 
-<table class="table table-striped col-md-12" id="movies">
-  <thead>
-    <tr>
-      <th>Movie Title</th>
-      <th>Rating</th>
-      <th>Release Date</th>
-      <th>More Info</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td>
-          <%= movie.title %>
-        </td>
-        <td>
-          <%= movie.rating %>
-        </td>
-        <td>
-          <%= movie.release_date %>
-        </td>
-        <td>
-          <%= link_to "More about #{movie.title}", movie_path(movie) %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container" id="movies">
+
+  <%# 1. 这是表头 (Header Row)，用 div 实现 %>
+  <%# d-none d-md-flex 类让表头在小屏幕上隐藏，在大屏幕上显示为 flex 布局 %>
+  <div class="row font-weight-bold py-2 border-bottom d-none d-md-flex">
+    <div class="col-md-3">Movie Title</div>
+    <div class="col-md-2">Rating</div>
+    <div class="col-md-4">Release Date</div>
+    <div class="col-md-3">More Info</div>
+  </div>
+
+  <%# 2. 遍历 @movies 集合，为每部电影创建一个 div "行" %>
+  <% @movies.each do |movie| %>
+    <%# 这个 div 就是测试脚本期望找到的代表单个电影的 div 元素 %>
+    <div class="row py-2 border-top">
+      <%# 下面是电影的 "单元格"，用带列(col)的 div 实现 %>
+      <div class="col-md-3"><%= movie.title %></div>
+      <div class="col-md-2"><%= movie.rating %></div>
+      <div class="col-md-4"><%= movie.release_date %></div>
+      <div class="col-md-3"><%= link_to "More about #{movie.title}", movie_path(movie) %></div>
+    </div>
+  <% end %>
+</div>
+
+
 <%= link_to 'Add new movie', new_movie_path, :class => 'btn btn-primary' %>
