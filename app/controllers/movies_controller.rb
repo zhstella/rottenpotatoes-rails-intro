@@ -28,6 +28,9 @@ class MoviesController < ApplicationController
     else
       @sort_by = nil
     end
+
+      @movies = Movie.with_ratings(@ratings_to_show)
+      @movies = @movies.order(@sort_by) if @sort_by
   end
 
   def new
