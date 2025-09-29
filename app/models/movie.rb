@@ -1,10 +1,10 @@
 class Movie < ActiveRecord::Base
   def self.all_ratings
-    pluck(:rating).uniq
+    ['G', 'PG', 'PG-13', 'R']
   end
 
   def self.with_ratings(ratings_list)
-    if ratings_list.nil? || ratings_list.empty?
+    if ratings_list.blank?
       Movie.all
     else
       Movie.where(rating: ratings_list)
